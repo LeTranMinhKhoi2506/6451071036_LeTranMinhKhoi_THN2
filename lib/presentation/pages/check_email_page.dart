@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../constants.dart';
+import '../../constants.dart';
 
-class CheckEmailScreen extends StatelessWidget {
-  const CheckEmailScreen({super.key});
+class CheckEmailPage extends StatelessWidget {
+  const CheckEmailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,6 @@ class CheckEmailScreen extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Giả lập việc xác thực email thành công và chuyển sang màn hình Success
                     Navigator.pushNamed(context, '/success');
                   },
                   style: ElevatedButton.styleFrom(

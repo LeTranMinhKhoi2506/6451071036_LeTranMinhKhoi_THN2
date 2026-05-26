@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../constants.dart';
+import '../../constants.dart';
 
-class SuccessfullyScreen extends StatelessWidget {
-  const SuccessfullyScreen({super.key});
+class SuccessfullyPage extends StatelessWidget {
+  const SuccessfullyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,6 @@ class SuccessfullyScreen extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Chuyển về màn hình Login và xóa hết các màn hình trước đó trong stack
                     Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
                   },
                   style: ElevatedButton.styleFrom(

@@ -1,8 +1,41 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
+import '../../constants.dart';
+import '../../injection_container.dart';
+import '../../domain/usecases/login_usecase.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
+
+  void _login() async {
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill in all fields')),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+    
+    final loginUseCase = sl<LoginUseCase>();
+    final result = await loginUseCase(_emailController.text, _passwordController.text);
+
+    if (mounted) {
+      result.fold(
+        (failure) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(failure))),
+        (user) => Navigator.pushReplacementNamed(context, '/onboarding'),
+      );
+      setState(() => _isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,22 +51,24 @@ class LoginScreen extends StatelessWidget {
               const Text('Welcome Back', style: AppTextStyles.heading),
               const SizedBox(height: 8),
               const Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+                'Enter your credentials to access your account',
                 textAlign: TextAlign.center,
                 style: AppTextStyles.body,
               ),
               const SizedBox(height: 40),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(
                   labelText: 'Email',
-                  hintText: 'Brandonelouis@gmail.com',
+                  hintText: 'example@gmail.com',
                   border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 20),
-              const TextField(
+              TextField(
+                controller: _passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Password',
                   suffixIcon: Icon(Icons.visibility_off),
                   border: OutlineInputBorder(),
@@ -50,9 +85,7 @@ class LoginScreen extends StatelessWidget {
                     ],
                   ),
                   TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/forgot-password');
-                    },
+                    onPressed: () => Navigator.pushNamed(context, '/forgot-password'),
                     child: const Text('Forgot Password?'),
                   ),
                 ],
@@ -62,29 +95,15 @@ class LoginScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/onboarding');
-                  },
+                  onPressed: _isLoading ? null : _login,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   ),
-                  child: const Text('LOGIN', style: AppTextStyles.button),
-                ),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.login, color: Colors.red),
-                  label: const Text('SIGN IN WITH GOOGLE', style: TextStyle(color: AppColors.textMain)),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.googleButton,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  ),
+                  child: _isLoading 
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : const Text('LOGIN', style: AppTextStyles.button),
                 ),
               ),
               const SizedBox(height: 20),
@@ -93,9 +112,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   const Text("You don't have an account? "),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/signup');
-                    },
+                    onTap: () => Navigator.pushNamed(context, '/signup'),
                     child: const Text(
                       'Sign up',
                       style: TextStyle(color: AppColors.secondary, decoration: TextDecoration.underline),
@@ -108,5 +125,12 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }

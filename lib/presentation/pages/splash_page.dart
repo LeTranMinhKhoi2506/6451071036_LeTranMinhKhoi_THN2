@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../constants.dart';
+import '../../constants.dart';
 
-class SplashLogoScreen extends StatefulWidget {
-  const SplashLogoScreen({super.key});
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
 
   @override
-  State<SplashLogoScreen> createState() => _SplashLogoScreenState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashLogoScreenState extends State<SplashLogoScreen> {
+class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
