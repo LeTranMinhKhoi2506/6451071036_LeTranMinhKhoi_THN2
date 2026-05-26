@@ -50,8 +50,8 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBggjdjyQp5CzJkzLXKKnkUCirmmPfjfsc',
-    appId: '1:571380933992:web:8832a8a441874d0ec522dd',
+    apiKey: 'YOUR_API_KEY_APP',
+    appId: 'YOUR_API_ID_APP',
     messagingSenderId: '571380933992',
     projectId: 'jobfinder-e06f4',
     authDomain: 'jobfinder-e06f4.firebaseapp.com',
@@ -60,8 +60,8 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyANEKzzBTq59eXA3g2rdJRks3C-JxU8THE',
-    appId: '1:571380933992:android:a03360f3c4cdc396c522dd',
+    apiKey: 'YOUR_API_KEY_APP',
+    appId: 'YOUR_API_ID_APP',
     messagingSenderId: '571380933992',
     projectId: 'jobfinder-e06f4',
     storageBucket: 'jobfinder-e06f4.firebasestorage.app',
