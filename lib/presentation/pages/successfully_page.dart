@@ -26,7 +26,7 @@ class SuccessfullyPage extends StatelessWidget {
               const SizedBox(height: 40),
               Center(
                 child: SvgPicture.asset(
-                  'lib/images/success.svg',
+                  'lib/asset/images/success.svg',
                   height: 150,
                 ),
               ),

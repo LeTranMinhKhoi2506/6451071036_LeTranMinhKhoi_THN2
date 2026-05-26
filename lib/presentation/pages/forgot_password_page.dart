@@ -67,7 +67,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               const SizedBox(height: 40),
               Center(
                 child: SvgPicture.asset(
-                  'lib/images/forgot_password.svg',
+                  'lib/asset/images/forgot_password.svg',
                   height: 150,
                 ),
               ),

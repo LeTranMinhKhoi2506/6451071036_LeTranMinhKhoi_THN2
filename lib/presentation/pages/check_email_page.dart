@@ -26,7 +26,7 @@ class CheckEmailPage extends StatelessWidget {
               const SizedBox(height: 40),
               Center(
                 child: SvgPicture.asset(
-                  'lib/images/check_your_password.svg',
+                  'lib/asset/images/check_your_password.svg',
                   height: 150,
                 ),
               ),

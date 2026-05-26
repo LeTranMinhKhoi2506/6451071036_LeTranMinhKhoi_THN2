@@ -23,7 +23,7 @@ class OnboardingPage extends StatelessWidget {
               const Spacer(),
               Center(
                 child: SvgPicture.asset(
-                  'lib/images/splash_screen.svg',
+                  'lib/asset/images/splash_screen.svg',
                   height: 300,
                 ),
               ),

@@ -32,7 +32,7 @@ class _SplashPageState extends State<SplashPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(
-              'lib/images/Logo.svg',
+              'lib/asset/images/Logo.svg',
               width: 80,
               height: 80,
             ),
